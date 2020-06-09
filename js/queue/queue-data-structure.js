@@ -6,6 +6,7 @@ class QueueDataStructure {
 
   display() {
     // ... your code goes here
+
   }
 
   canEnqueue() {

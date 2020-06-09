@@ -10,10 +10,19 @@ const newStack = new StackDataStructure();
 
 const clearStackInput = () => {
   // ... your code goes here
+  stackInput.value = '';
 };
 
 const renderListStack = () => {
   // ... your code goes here
+  stackList.innerHTML = `<li> ${newStack.stackControl.length} element(s) in the stack...</li>`;
+  newStack.stackControl.forEach((item)=>{
+    const newStackItem = document.createElement('li');
+    newStackItem.className = "inactive";
+    newStackItem.innerHTML = item;
+    stackList.appendChild(newStackItem)
+  })
+
 };
 
 renderListStack();
@@ -28,11 +37,37 @@ const generateWarningStack = type => {
 
 const addToStack = () => {
   // ... your code goes here
+  warningBottomStack.style.display = 'none'
+  if(newStack.canPush()) {
+    newStack.push(stackInput.value);
+    renderListStack()
+    clearStackInput()
+    console.log("can push")
+  } else {
+    generateWarningStack('overflow')
+    console.log("can't push")
+  }
+  
 };
 
 const removeFromStack = () => {
   // ... your code goes here
+
+  if(newStack.isEmpty()) {
+    console.log("its empty")
+  } else {
+    newStack.pop()
+    renderListStack()
+    clearStackInput()
+  }
+  console.log("removed from stack")
 };
 
 addStackBtn.addEventListener('click', addToStack);
 takeStackBtn.addEventListener('click', removeFromStack);
+
+console.log(stackInput)
+console.log(stackList)
+console.log(newStack.stackControl)
+console.log(warningBottomStack)
+console.log(container)
